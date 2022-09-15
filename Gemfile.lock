@@ -67,6 +67,9 @@ GEM
       msgpack (~> 1.0)
     builder (3.2.4)
     byebug (11.1.3)
+    cable_ready (4.5.0)
+      rails (>= 5.2)
+      thread-local (>= 1.1.0)
     capybara (3.35.3)
       addressable
       mini_mime (>= 0.1.3)
@@ -77,9 +80,11 @@ GEM
       xpath (~> 3.2)
     childprocess (3.0.0)
     concurrent-ruby (1.1.9)
+    connection_pool (2.2.5)
     crass (1.0.6)
     erubi (1.10.0)
     ffi (1.15.1)
+    foreman (0.87.2)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     i18n (1.8.10)
@@ -114,7 +119,7 @@ GEM
     rack (2.2.3)
     rack-mini-profiler (2.3.2)
       rack (>= 1.2.0)
-    rack-proxy (0.7.0)
+    rack-proxy (0.7.4)
       rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -148,6 +153,10 @@ GEM
     rb-fsevent (0.11.0)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    redis (5.0.4)
+      redis-client (>= 0.7.4)
+    redis-client (0.8.0)
+      connection_pool
     regexp_parser (2.1.1)
     rubyzip (2.3.0)
     sass-rails (6.0.0)
@@ -173,7 +182,14 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     sqlite3 (1.4.2)
+    stimulus_reflex (3.4.1)
+      cable_ready (>= 4.5)
+      nokogiri
+      rack
+      rails (>= 5.2)
+      redis
     thor (1.1.0)
+    thread-local (1.1.0)
     tilt (2.0.10)
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
@@ -189,7 +205,7 @@ GEM
       nokogiri (~> 1.6)
       rubyzip (>= 1.3.0)
       selenium-webdriver (>= 3.0, < 4.0)
-    webpacker (5.4.0)
+    webpacker (5.4.3)
       activesupport (>= 5.2)
       rack-proxy (>= 0.6.1)
       railties (>= 5.2)
@@ -209,6 +225,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
   capybara (>= 3.26)
+  foreman (~> 0.87.2)
   jbuilder (~> 2.7)
   listen (~> 3.3)
   pg (~> 1.2.3)
@@ -219,11 +236,12 @@ DEPENDENCIES
   selenium-webdriver
   spring
   sqlite3 (~> 1.4)
+  stimulus_reflex (~> 3.4)
   turbolinks (~> 5)
   tzinfo-data
   web-console (>= 4.1.0)
   webdrivers
-  webpacker (~> 5.0)
+  webpacker (~> 5.4.3)
 
 RUBY VERSION
    ruby 2.7.3p183
