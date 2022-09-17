@@ -7,6 +7,9 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 p1 = Person.create!(name: 'Jordan')
 p2 = Person.create!(name: 'Claire')
-game = Game.create!(player_one: p1, player_two: p2)
+game = Game.create!
+
+GamePerson.create!(game: game, person: p1)
+GamePerson.create!(game: game, person: p2)
 
 puts game.id

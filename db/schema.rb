@@ -10,26 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_15_102533) do
+ActiveRecord::Schema.define(version: 2022_09_17_115014) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "games", force: :cascade do |t|
-    t.bigint "player_one_id", null: false
-    t.bigint "player_two_id", null: false
+  create_table "game_people", force: :cascade do |t|
+    t.bigint "game_id", null: false
+    t.bigint "person_id", null: false
+    t.text "snake", null: false
+    t.integer "direction", null: false
+    t.string "color", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["player_one_id"], name: "index_games_on_player_one_id"
-    t.index ["player_two_id"], name: "index_games_on_player_two_id"
+    t.index ["game_id"], name: "index_game_people_on_game_id"
+    t.index ["person_id"], name: "index_game_people_on_person_id"
+  end
+
+  create_table "games", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "people", force: :cascade do |t|
-    t.text "name"
+    t.text "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "games", "people", column: "player_one_id"
-  add_foreign_key "games", "people", column: "player_two_id"
+  add_foreign_key "game_people", "games"
+  add_foreign_key "game_people", "people"
 end

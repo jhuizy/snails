@@ -1,4 +1,4 @@
 class Game < ApplicationRecord
-  belongs_to :player_one, class_name: 'Person'
-  belongs_to :player_two, class_name: 'Person'
+  has_many :game_people
+  has_many :people, through: :game_people
 end
