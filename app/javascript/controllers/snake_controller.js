@@ -4,7 +4,7 @@ import consumer from '../channels/consumer';
 // Connects to data-controller="controller"
 class Snake {
   constructor(blocks) {
-    this.blocks = blocks
+    this.blocks = blocks.map(({ x, y }) => new Block(x, y))
   }
 
   fill(context) {
@@ -57,7 +57,7 @@ export default class extends Controller {
    */
   _cableReceived(data) {
     // Called when there's incoming data on the websocket for this channel
-    data.forEach(person => this._paint(person))
+    JSON.parse(data.message).forEach(person => this._paint(person))
   }
 
   _ping() {

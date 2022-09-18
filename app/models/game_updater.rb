@@ -24,7 +24,7 @@ class GameUpdater
 
   def game_json
     game_people.map do |game_person|
-      [{ name: game_people.person_name, color: game_people.color, snake: game_people.snake }]
+      { name: game_person.person_name, color: game_person.color, snake: game_person.snake }
     end.to_json
   end
 

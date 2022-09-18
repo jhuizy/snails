@@ -62,3 +62,5 @@ gem "stimulus_reflex", "~> 3.4"
 gem "foreman", "~> 0.87.2"
 
 gem "stimulus-rails", "~> 1.1"
+
+gem "redis", "~> 4"
