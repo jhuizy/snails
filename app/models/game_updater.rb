@@ -17,13 +17,22 @@ class GameUpdater
   end
 
   def update
+    move!
+    update_alive!
+  end
+
+  def update_alive!
+    AliveUpdater.new(game_people).perform
+  end
+
+  def move!
     game_people.find_each do |game_person|
       game_person.tap(&:move).save!
     end
   end
 
   def game_json
-    game_people.map do |game_person|
+    game_people.select(&:is_alive?).map do |game_person|
       { name: game_person.person_name, color: game_person.color, snake: game_person.snake }
     end.to_json
   end

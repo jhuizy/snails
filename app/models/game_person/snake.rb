@@ -22,13 +22,18 @@ class GamePerson
       add_new_block
     end
 
+    def reset
+      set_defaults
+    end
+
     private
 
     def set_defaults
       assign_attributes(
         snake: { blocks: [{x: 50, y: 50}] },
         direction: :down,
-        color: '#000000'
+        color: '#000000',
+        is_alive: true
       )
     end
 

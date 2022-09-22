@@ -1,2 +1,2 @@
 <h1>Games::Play#index</h1>
-<canvas width="500" height="300" id="canvas" data-controller="snake" game-id="<%= @game.id %>"></canvas>
+<canvas class="border-2" width="<%= Game::HEIGHT %>" height="<%= Game::WIDTH %>" id="canvas" data-controller="snake" data-game-id="<%= @game.id %>" data-game-person-id="<%= @game_person.id %>"></canvas>

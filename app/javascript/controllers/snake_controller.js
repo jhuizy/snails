@@ -25,11 +25,35 @@ class Block {
 
 export default class extends Controller {
   connect() {
+    this.gameId = this.element.dataset['gameId']
+    this.gamePersonId = this.element.dataset['gamePersonId']
     this.channel = consumer.subscriptions.create('SnakeChannel', {
       connected: this._cableConnected.bind(this),
       disconnected: this._cableDisconnected.bind(this),
       received: this._cableReceived.bind(this),
     });
+
+    this.keyListener = window.addEventListener('keyup', this.onKeyUp.bind(this))
+  }
+
+  disconnect() {
+    this.element.removeEventListener(this.keyListener)
+  }
+
+  /**
+   * @param {Event} event
+   */
+  onKeyUp(event) {
+    event.preventDefault()
+
+    const { gameId, gamePersonId } = this
+    const direction = {
+      "ArrowLeft": 'left',
+      "ArrowRight": 'right',
+      "ArrowUp": 'up',
+      "ArrowDown": 'down'
+    }[event.key]
+    this.channel.send({ gameId, gamePersonId, direction })
   }
 
   _paint(person) {
@@ -44,6 +68,7 @@ export default class extends Controller {
 
   _cableConnected() {
     // Called when the subscription is ready for use on the server
+    this._resetSnake()
     this._ping()
   }
 
@@ -62,8 +87,13 @@ export default class extends Controller {
 
   _ping() {
     setTimeout(() => {
-      this.channel.send({ alive: true })
+      this.channel.send({ gameId: this.gameId, alive: true })
       this._ping()
     }, 1000)
+  }
+
+  _resetSnake() {
+    const { gameId, gamePersonId } = this
+    this.channel.send({ gameId, gamePersonId, reset: true })
   }
 }

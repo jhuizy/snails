@@ -9,6 +9,15 @@ class SnakeChannel < ApplicationCable::Channel
   end
 
   def receive(data)
-    GameJob.perform_later(Game.last.id)
+    game_id = data['gameId']
+    game_person_id = data['gamePersonId']
+    if data['alive'].present? 
+      GameJob.perform_later(game_id)
+    elsif direction = data['direction']
+      GamePerson.find(game_person_id).update(direction: direction.to_sym)
+      GameJob.perform_later(game_id)
+    elsif data['reset'].present?
+      GamePerson.find(game_person_id).tap(&:reset).save!
+    end
   end
 end

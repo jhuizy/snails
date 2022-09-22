@@ -64,3 +64,5 @@ gem "foreman", "~> 0.87.2"
 gem "stimulus-rails", "~> 1.1"
 
 gem "redis", "~> 4"
+
+gem "tailwindcss-rails", "~> 2.0"

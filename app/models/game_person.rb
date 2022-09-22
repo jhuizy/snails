@@ -5,4 +5,8 @@ class GamePerson < ApplicationRecord
   belongs_to :person
 
   delegate :name, to: :person, prefix: true
+
+  def is_dead?
+    !is_alive?
+  end
 end
