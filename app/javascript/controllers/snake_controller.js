@@ -57,7 +57,6 @@ export default class extends Controller {
   }
 
   _paint(person) {
-    this._context().clearRect(0, 0, this.element.width, this.element.height);
     this._context().fillStyle = person.color
     new Snake(person.snake.blocks).fill(this._context())
   }
@@ -82,6 +81,7 @@ export default class extends Controller {
    */
   _cableReceived(data) {
     // Called when there's incoming data on the websocket for this channel
+    this._context().clearRect(0, 0, this.element.width, this.element.height);
     JSON.parse(data.message).forEach(person => this._paint(person))
   }
 

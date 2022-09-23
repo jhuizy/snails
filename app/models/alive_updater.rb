@@ -13,7 +13,7 @@ class AliveUpdater
 
   def dead_people
     game_people.reject do |game_person|
-      game_person.is_dead? || (game_person.snake[:blocks] & blocks).empty?
+      game_person.is_dead? || game_person.in_bounds? || (game_person.snake[:blocks] & blocks).empty?
     end
   end
 

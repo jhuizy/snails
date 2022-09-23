@@ -26,15 +26,24 @@ class GamePerson
       set_defaults
     end
 
+    def in_bounds?
+      last_block[:x] < Game::WIDTH && last_block[:x] > 0 && last_block[:y] < Game::HEIGHT && last_block[:y] > 0
+    end
+
     private
 
     def set_defaults
       assign_attributes(
-        snake: { blocks: [{x: 50, y: 50}] },
+        snake: { blocks: [{x: next_rand, y: next_rand}] },
         direction: :down,
         color: '#000000',
         is_alive: true
       )
+    end
+
+    def next_rand
+      max = [Game::HEIGHT, Game::WIDTH].max / 10
+      rand(0..max) * 10
     end
 
     def remove_last_block
@@ -50,7 +59,11 @@ class GamePerson
     end
     
     def first_block
-      blocks.first
+      @first_block ||= blocks.first
+    end
+
+    def last_block
+      @last_block ||= blocks.last
     end
 
     def next_x
