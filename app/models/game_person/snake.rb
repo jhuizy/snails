@@ -34,16 +34,11 @@ class GamePerson
 
     def set_defaults
       assign_attributes(
-        snake: { blocks: [{x: next_rand, y: next_rand}] },
+        snake: { blocks: [{x: game.next_x, y: game.next_y}] },
         direction: :down,
         color: '#000000',
         is_alive: true
       )
-    end
-
-    def next_rand
-      max = [Game::HEIGHT, Game::WIDTH].max / 10
-      rand(0..max) * 10
     end
 
     def remove_last_block
